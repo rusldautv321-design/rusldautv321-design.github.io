@@ -1,81 +1,133 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>На пределе глубин | Хроники бурения</title>
+    <title>Deep Drill Records | Хроники Бурения</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1a1a1a; color: #e0e0e0; margin: 0; line-height: 1.6; }
-        header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516934024742-b461fbc4760e?auto=format&fit=crop&q=80&w=1000'); background-size: cover; height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-bottom: 5px solid #f39c12; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        h1 { font-size: 3.5rem; color: #f39c12; margin-bottom: 10px; text-transform: uppercase; }
-        .hero-sub { font-size: 1.5rem; max-width: 700px; }
-        .section { padding: 40px 0; border-bottom: 1px solid #333; }
-        h2 { color: #f39c12; border-left: 5px solid #f39c12; padding-left: 15px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #222; }
-        th, td { padding: 15px; border: 1px solid #444; text-align: left; }
-        th { background-color: #f39c12; color: #000; }
-        .record-card { background: #333; padding: 20px; border-radius: 8px; margin: 10px 0; border-right: 4px solid #f39c12; }
-        .stat-value { color: #f39c12; font-weight: bold; font-size: 1.2rem; }
-        footer { text-align: center; padding: 40px; background: #111; color: #777; }
+        :root {
+            --primary: #f39c12; /* Оранжевый - цвет бурового оборудования */
+            --dark: #121212;
+            --card-bg: #1e1e1e;
+            --text: #e0e0e0;
+        }
+        body { 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            background-color: var(--dark); 
+            color: var(--text); 
+            margin: 0; 
+            line-height: 1.6;
+        }
+        header { 
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1516934024742-b461fbc4760e?auto=format&fit=crop&q=80&w=1200'); 
+            background-size: cover;
+            background-position: center;
+            height: 70vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 20px;
+        }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-sub { font-size: 1.2rem; color: #bbb; max-width: 600px; margin-top: 10px; }
+        
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+        
+        h2 { color: var(--primary); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 30px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        
+        .card { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 12px; 
+            border-top: 4px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(243, 156, 18, 0.2); }
+        
+        .stat { font-size: 2rem; font-weight: bold; color: var(--primary); display: block; margin-bottom: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 0.9rem; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+        th { color: var(--primary); text-transform: uppercase; }
+        tr:hover { background: rgba(255,255,255,0.05); }
+
+        .footer { background: #0a0a0a; text-align: center; padding: 50px 20px; color: #666; font-size: 0.8rem; }
+        
+        @media (max-width: 600px) {
+            th { display: none; }
+            td { display: block; text-align: right; border-bottom: 1px solid #333; position: relative; padding-left: 50%; }
+            td::before { content: attr(data-label); position: absolute; left: 15px; font-weight: bold; color: var(--primary); }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>На пределе глубин</h1>
-    <p class="hero-sub">Авторский проект о рекордах, скоростях и технологиях мирового бурения</p>
+    <p class="hero-sub">Цифровая хроника величайших достижений в истории бурения</p>
 </header>
 
 <div class="container">
-    <section class="section">
-        <h2>О проекте</h2>
-        <p>Приветствую! Этот сайт — моя личная цифровая энциклопедия, посвященная самым глубоким точкам планеты, до которых дотянулось сверло человека. Здесь собраны факты о том, как технологии побеждают давление и время.</p>
-    </section>
-
-    <section class="section">
-        <h2>Мировые рекорды глубины</h2>
+    <section>
+        <h2>🏆 Мировые рекорды</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Название</th>
+                    <th>Скважина</th>
                     <th>Глубина (м)</th>
-                    <th>Тип рекорда</th>
+                    <th>Локация</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Кольская СГ-3</td>
-                    <td>12 262</td>
-                    <td>Максимальная вертикальная глубина</td>
+                    <td data-label="Скважина">Кольская СГ-3</td>
+                    <td data-label="Глубина">12 262</td>
+                    <td data-label="Локация">Мурманская обл., РФ</td>
                 </tr>
                 <tr>
-                    <td>Z-44 Чайво</td>
-                    <td>15 000</td>
-                    <td>Максимальная общая длина ствола</td>
+                    <td data-label="Скважина">Z-44 Чайво</td>
+                    <td data-label="Глубина">15 000</td>
+                    <td data-label="Локация">Сахалин, РФ</td>
                 </tr>
                 <tr>
-                    <td>Al Shaheen BD-04A</td>
-                    <td>12 289</td>
-                    <td>Рекорд скорости (12 км за 36 дней)</td>
+                    <td data-label="Скважина">Al Shaheen</td>
+                    <td data-label="Глубина">12 289</td>
+                    <td data-label="Локация">Катар</td>
                 </tr>
             </tbody>
         </table>
     </section>
 
-    <section class="section">
-        <h2>Технологический прорыв</h2>
-        <div class="record-card">
-            <p><span class="stat-value">PDC Долота:</span> Современные алмазные долота позволяют проходить сотни метров без замены инструмента, выдерживая чудовищные температуры.</p>
-        </div>
-        <div class="record-card">
-            <p><span class="stat-value">РУС:</span> Роторно-управляемые системы позволяют "рулить" скважиной на глубине 10 км с точностью до метра.</p>
+    <section>
+        <h2>🚀 Технологии прорыва</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="stat">200°C+</span>
+                <h3>Термостойкость</h3>
+                <p>Современная электроника MWD способна работать в экстремальном жару глубоких горизонтов.</p>
+            </div>
+            <div class="card">
+                <span class="stat">РУС</span>
+                <h3>Точное наведение</h3>
+                <p>Роторно-управляемые системы позволяют бурить горизонтальные участки длиной в километры.</p>
+            </div>
+            <div class="card">
+                <span class="stat">PDC</span>
+                <h3>Алмазная мощь</h3>
+                <p>Долота с поликристаллическими алмазами проходят тысячи метров без подъема на поверхность.</p>
+            </div>
         </div>
     </section>
 </div>
 
-<footer>
-    <p>&copy; 2026 Личный сайт о бурении | Создано для энтузиастов отрасли</p>
-</footer>
+<div class="footer">
+    <p>Личный проект эксперта в области бурения. 2026</p>
+    <p>Все данные взяты из открытых источников.</p>
+</div>
 
 </body>
 </html>
